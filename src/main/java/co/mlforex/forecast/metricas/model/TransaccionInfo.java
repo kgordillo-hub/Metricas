@@ -1,5 +1,7 @@
-package co.mlforex.forecast.model;
+package co.mlforex.forecast.metricas.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.io.Serializable;
@@ -8,20 +10,25 @@ import java.util.List;
 
 @DynamoDBTable(tableName = "MetricasInfo")
 public class TransaccionInfo implements Serializable {
-    //Partition Key
+
+    String UID;
+
+    @DynamoDBAttribute
     private String nombreApp;
+    @DynamoDBAttribute
     private String version;
+    @DynamoDBAttribute
     private String idUsuario;
+    @DynamoDBAttribute
     private String idTransaccion;
-    //Autogenerado por DB
-    private Integer consecutivo;
 
-    //Atributos
-    private String [] metricasCalcular;
-    private List<Metrica> metricas = new ArrayList<>();
 
-    private List<Double> valoresReales;
-    private List<Double> valoresCalculados;
+    @DynamoDBAttribute
+    private List<String> metricasCalcular;
+    @DynamoDBAttribute
+    private List<Metrica> metricas;
+    @DynamoDBAttribute
+    private String resultado;
 
     public TransaccionInfo(){
 
@@ -59,12 +66,12 @@ public class TransaccionInfo implements Serializable {
         this.idTransaccion = idTransaccion;
     }
 
-    public Integer getConsecutivo() {
-        return consecutivo;
+    public List<String> getMetricasCalcular() {
+        return metricasCalcular;
     }
 
-    public void setConsecutivo(Integer consecutivo) {
-        this.consecutivo = consecutivo;
+    public void setMetricasCalcular(List<String> metricasCalcular) {
+        this.metricasCalcular = metricasCalcular;
     }
 
     public List<Metrica> getMetricas() {
@@ -75,27 +82,21 @@ public class TransaccionInfo implements Serializable {
         this.metricas = metricas;
     }
 
-    public List<Double> getValoresReales() {
-        return valoresReales;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setValoresReales(List<Double> valoresReales) {
-        this.valoresReales = valoresReales;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
-    public List<Double> getValoresCalculados() {
-        return valoresCalculados;
+    @DynamoDBHashKey(attributeName = "UID")
+    public String getUID() {
+        return UID;
     }
 
-    public void setValoresCalculados(List<Double> valoresCalculados) {
-        this.valoresCalculados = valoresCalculados;
+    public void setUID(String UID) {
+        this.UID = UID;
     }
 
-    public String[] getMetricasCalcular() {
-        return metricasCalcular;
-    }
-
-    public void setMetricasCalcular(String[] metricasCalcular) {
-        this.metricasCalcular = metricasCalcular;
-    }
 }

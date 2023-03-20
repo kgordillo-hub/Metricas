@@ -1,4 +1,4 @@
-package co.mlforex.forecast.model;
+package co.mlforex.forecast.metricas.model;
 
 public class Metrica {
 

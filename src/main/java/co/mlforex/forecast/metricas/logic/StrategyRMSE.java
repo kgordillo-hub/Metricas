@@ -1,14 +1,14 @@
-package co.mlforex.forecast.logic;
+package co.mlforex.forecast.metricas.logic;
 
-import co.mlforex.forecast.model.Metrica;
+import co.mlforex.forecast.metricas.model.Metrica;
 
 import java.util.List;
 
-public class StrategyMAPE implements Strategy{
+public class StrategyRMSE implements Strategy{
     @Override
     public Metrica execute(List<Double> datosReales, List<Double> datosCalculados) {
         Metrica metrica = new Metrica();
-        metrica.setNombre("MAPE");
+        metrica.setNombre("RMSE");
         //Hacer calculo
         metrica.setValor(0.0);
         return metrica;

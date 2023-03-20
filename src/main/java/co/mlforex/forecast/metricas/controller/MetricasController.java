@@ -1,14 +1,13 @@
-package co.mlforex.forecast.controller;
+package co.mlforex.forecast.metricas.controller;
 
-import co.mlforex.forecast.model.TransaccionInfo;
-import co.mlforex.forecast.service.ServicioMetricas;
+
+import co.mlforex.forecast.metricas.model.TransaccionInfo;
+import co.mlforex.forecast.metricas.service.ServicioMetricas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class MetricasController {
@@ -23,8 +22,8 @@ public class MetricasController {
         return null;
     }
 
-    public ResponseEntity<List<TransaccionInfo>> consultarMetricasApp(){
-        final List<TransaccionInfo> listMetrics = servicioMetricas.consultarMetricasApp();
+    public ResponseEntity<TransaccionInfo> consultarMetricasApp(String idTransaccion){
+        final TransaccionInfo listMetrics = servicioMetricas.consultarMetricasApp(idTransaccion);
         return new ResponseEntity<>(listMetrics, HttpStatus.OK);
     }
 }
