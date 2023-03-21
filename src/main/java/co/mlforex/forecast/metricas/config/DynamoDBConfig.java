@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 
 @Configuration
 @EnableDynamoDBRepositories
-        (basePackages = "co.mlforex.forecast.gestionResultados.repository")
+        (basePackages = "co.mlforex.forecast.metricas.repository")
 public class DynamoDBConfig {
 
     @Value("${amazon.dynamodb.endpoint}")

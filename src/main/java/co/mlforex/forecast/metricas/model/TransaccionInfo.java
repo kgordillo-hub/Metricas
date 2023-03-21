@@ -2,6 +2,7 @@ package co.mlforex.forecast.metricas.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.io.Serializable;
@@ -27,7 +28,7 @@ public class TransaccionInfo implements Serializable {
     private List<String> metricasCalcular;
     @DynamoDBAttribute
     private List<Metrica> metricas;
-    @DynamoDBAttribute
+    @DynamoDBIgnore
     private String resultado;
 
     public TransaccionInfo(){

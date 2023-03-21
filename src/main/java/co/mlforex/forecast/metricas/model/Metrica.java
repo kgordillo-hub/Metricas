@@ -1,8 +1,14 @@
 package co.mlforex.forecast.metricas.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+
+@DynamoDBDocument
 public class Metrica {
 
+    @DynamoDBAttribute
     private String nombre;
+    @DynamoDBAttribute
     private Double valor;
 
     public Metrica(){

@@ -9,8 +9,15 @@ public class StrategyRMSE implements Strategy{
     public Metrica execute(List<Double> datosReales, List<Double> datosCalculados) {
         Metrica metrica = new Metrica();
         metrica.setNombre("RMSE");
-        //Hacer calculo
-        metrica.setValor(0.0);
+        int n = datosReales.size();
+        double sum = 0.0;
+        for (int i = 0; i < n; i++) {
+            sum = sum + Math.pow(datosCalculados.get(i) - datosReales.get(i),2);
+        }
+        double rmse = Math.sqrt(sum / n);
+
+        metrica.setValor(rmse);
+
         return metrica;
     }
 }

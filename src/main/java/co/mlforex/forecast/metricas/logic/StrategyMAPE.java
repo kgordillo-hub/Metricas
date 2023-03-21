@@ -9,8 +9,18 @@ public class StrategyMAPE implements Strategy{
     public Metrica execute(List<Double> datosReales, List<Double> datosCalculados) {
         Metrica metrica = new Metrica();
         metrica.setNombre("MAPE");
-        //Hacer calculo
-        metrica.setValor(0.0);
+
+        int n = datosReales.size();
+        double sum = 0.0;
+        for (int i = 0; i < n; i++) {
+            sum = sum + Math.abs(datosReales.get(i) - datosCalculados.get(i))/datosReales.get(i);
+        }
+        double mape = (sum / n) * 100;
+
+        metrica.setValor(mape);
+
         return metrica;
     }
+
+
 }
