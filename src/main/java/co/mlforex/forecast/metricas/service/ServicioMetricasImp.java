@@ -14,10 +14,7 @@ import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ServicioMetricasImp implements ServicioMetricas {
@@ -63,6 +60,22 @@ public class ServicioMetricasImp implements ServicioMetricas {
     public TransaccionInfo consultarMetricasApp(String idTransaccion) {
         final Optional<TransaccionInfo> transaccionInfoOp = metricasInfo.findById(idTransaccion);
         return transaccionInfoOp.get();
+    }
+
+    @Override
+    public List<TransaccionInfo> consultarMetricas(String idUsuario){
+        final Iterable<TransaccionInfo> metricasAll = metricasInfo.findAll();
+        final List<TransaccionInfo> listaMetricas = new ArrayList<>();
+        if(metricasAll!=null ){
+            final Iterator<TransaccionInfo> it = metricasAll.iterator();
+            while(it.hasNext()){
+                TransaccionInfo ti = it.next();
+                if(ti.getIdUsuario()!=null && ti.getIdUsuario().equalsIgnoreCase(idUsuario)){
+                    listaMetricas.add(ti);
+                }
+            }
+        }
+        return listaMetricas;
     }
 
     private Metrica calcularMetricaSpec(List<Double> valoresReales, List<Double> valoresCalculados, String tipoMetrica) {

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class MetricasController {
 
@@ -42,6 +44,22 @@ public class MetricasController {
             }
         }catch(final Exception e){
             logger.error("Error en MetricasController:consultarMetricasApp "+e.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getMetricasGeneral/{idUsuario}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<List<TransaccionInfo>> consultarMetricas(@PathVariable String idUsuario){
+        try{
+            final List<TransaccionInfo> transactions = servicioMetricas.consultarMetricas(idUsuario);
+            if(transactions != null){
+                return new ResponseEntity<>(transactions, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            }
+        }catch(final Exception e){
+            logger.error("Error en MetricasController:consultarMetricas "+e.getMessage());
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
